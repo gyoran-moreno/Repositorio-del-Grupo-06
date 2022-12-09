@@ -4,4 +4,3 @@ streamlit-option-menu
 os
 requests
 json
-matplotlib
