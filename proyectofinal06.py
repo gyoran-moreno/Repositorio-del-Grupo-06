@@ -1,25 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
 from streamlit_option_menu import option_menu
 import gdown 
 import os
-import requests
-import json
-from streamlit_lottie import st_lottie
 
-
-#cabecera para los gifs, para que se puedan ser descargados o se puedan subir desde el ordenador
-def load_lottiefile(filepath: str):
-	with open(filepath, "r") as f:
-		return json.load(f)
-
-def load_lottieurl(url: str):
-	r= requests.get(url)
-	if r.status_code != 200:
-		return None
-	return r.json()
 
 #menu de seleccionar, para que asi sea mas facil ir a información y los integrantes
 selected = option_menu(
@@ -30,9 +15,6 @@ selected = option_menu(
 	default_index= 0,
 	orientation="horizontal",
 )
-#nombre y url del gif a subir
-lottie_grupo= load_lottieurl("https://assets8.lottiefiles.com/packages/lf20_z4uccqir.json")
-
 #boton de integrantes mas información adicional
 if selected == "INTEGRANTES":
 	st.title("GRUPO 06")
@@ -54,41 +36,25 @@ if selected == "INTEGRANTES":
 			- correo: sebastian.saldana@upch.pe
 			- correo: gyoran.moreno@upch.pe
 			""")
-	st_lottie(lottie_grupo, key="house")
 	st.write("---")
 
-#nombre y url del gif a subir
-lottie_info= load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_tzv8osvb.json")
 
 #boton de información mas información adicional
 if selected == "INFORMACIÓN":
 	st.title("INFORMACIÓN SOBRE LA PÁGINA")
-	col1, col2= st.columns([3,2])
-	with col1:
-		st.write("""
+	st.write("""
 			*La información que contiene la página permite saber sobre el estado de licenciamiento de la universidad, así mismo información adicional, los datos son del DataSet “Sunedu - Licenciamiento institucional” elaborado por el Ministerio de educación del Perú.*
 			""")
-	with col2:
-		st_lottie(lottie_info, height= None, width=150, key="info")
 	st.info("Información de la tabla: https://www.datosabiertos.gob.pe/dataset/sunedu-licenciamiento-institucional")
 	st.write("---")
-
-#nombre y url del gif a subir
-lottie_bienve= load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_qjEvNMXYul.json")
 
 #inicio de la pagina
 
 st.title("SUNEDU - LICENCIAMIENTO INSTITUCIONAL")
-
-col1, col2= st.columns([3,2])
-
-with col1:
-	st.markdown("""
+st.markdown("""
 		Nuestra presente página es para ayudar a estudiantes y/o padres de familia que busca si cierta universidad está licenciada o no por parte de SUNEDU
 		---
-		""")
-with col2:
-	st_lottie(lottie_bienve,height= 280, width=250, key="hello")
+	""")
 
 #descarga y lectura del dataset
 
